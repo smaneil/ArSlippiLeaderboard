@@ -8,7 +8,7 @@ import { exec } from 'child_process';
 const fs = syncFs.promises;
 const execPromise = util.promisify(exec);
 
-const getPlayerConnectCodes = async (): Promise<string[]> => { return ['C4D#69','DUFF#838','YBAI#170','NATE#925'] };
+const getPlayerConnectCodes = async (): Promise<string[]> => { return ['C4D#69','DUFF#838','YBAI#170','NATE#925','BLRG#257','BO#80','UMARTH#289'] };
 
 const getPlayers = async () => {
   const codes = await getPlayerConnectCodes()
