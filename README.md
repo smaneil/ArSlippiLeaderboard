@@ -1,6 +1,6 @@
-# Colorado Ranked Slippi Leaderboard
+# Norcal Ranked Slippi Leaderboard
 
-Code powering https://grantismo.github.io/CoSlippiLeaderboard/#/
+Code powering https://grantismo.github.io/NorcalSlippiLeaderboard/#/
 
 ## Technologies
 
