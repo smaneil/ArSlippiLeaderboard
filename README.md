@@ -1,6 +1,6 @@
 # Norcal Ranked Slippi Leaderboard
 
-Code powering https://grantismo.github.io/NorcalSlippiLeaderboard/#/
+Code powering https://costasford.github.io/NorcalSlippiLeaderboard/#/
 
 ## Technologies
 
