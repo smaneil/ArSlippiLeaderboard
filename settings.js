@@ -1,15 +1,15 @@
 module.exports = {
   // Base application title used in document.title
-  title: 'Norcal Ranked Slippi Leaderboard',
+  title: 'Arkansas Ranked Slippi Leaderboard',
 
   // use cname option to add CNAME file to webpack build
   // CNAME file allows to use custom domain names with gh-pages, example:
-  // cname: 'omatsuri.app'
+  // cname: 'omatsuri.app'  
   cname: null,
 
   // add repo path for username.github.io/repoPath for react router to recognize paths,
   // use only when deployed to github.io, leave as null for deployments with custom domains
-  repoPath: 'https://costasford.github.io/NorcalSlippiLeaderboard/',
+  repoPath: 'https://smaniel.github.io/ArSlippiLeaderboard/',
 
   // Google sheets ID for player connect codes.
   // https://docs.google.com/spreadsheets/d/[YOUR ID]
