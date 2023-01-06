@@ -13,13 +13,13 @@ jobs:
 
     steps:
       - name: Check out the repository code on to the machine
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: Use Node.js 18.12.0
-      - uses: actions/setup-node@v3
+        uses: actions/setup-node@v3
 
       - name: Pull The Player Data
-      - run: bash ${GITHUB_WORKSPACE}/cron/run.sh
+        run: bash ${GITHUB_WORKSPACE}/cron/run.sh
 
       - name: Update on Github Pages
-      - run: npm run deploy
+        run: npm run deploy
