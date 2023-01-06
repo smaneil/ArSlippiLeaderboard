@@ -18,8 +18,11 @@ jobs:
       - name: Use Node.js 18.12.0
         uses: actions/setup-node@v3
 
-      - name: Install NPM Dependencies
-        run: npm install
+      - name: Install Yarn
+        run: npm install --global yarn
+
+      - name: Run Yarn
+        run: yarn
 
       - name: Pull The Player Data
         run: bash ${GITHUB_WORKSPACE}/cron/run.sh
