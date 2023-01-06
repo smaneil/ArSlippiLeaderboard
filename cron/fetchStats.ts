@@ -8,18 +8,23 @@ import { exec } from 'child_process';
 const fs = syncFs.promises;
 const execPromise = util.promisify(exec);
 
-const getPlayerConnectCodes = async (): Promise<string[]> => { 
+const getPlayerConnectCodes = async (): Promise<string[]> => {
 	return ['NATE#303','DAN#795','SOUL#906','RIMZ#185','DRU#419','RHEN#246','CYAN#654','FUCK#896','ROO#430','BRIT#1','DEMI#264','MKSC#118','CASA#299','RUDY#241','CREM#138','JAB#1','CNRT#306','POPE#478','FOX#283','TRIC#0'] };
 
 const getPlayers = async () => {
   const codes = await getPlayerConnectCodes()
   console.log(`Found ${codes.length} player codes`)
+  console.log(`Getting player data throttled`)
   const allData = codes.map(code => getPlayerDataThrottled(code))
+  console.log(`Getting results`)
   const results = await Promise.all(allData.map(p => p.catch(e => e)));
+  console.log(`Getting valid results`)
   const validResults = results.filter(result => !(result instanceof Error));
+  console.log(`Getting unsorted players`)
   const unsortedPlayers = validResults
     .filter((data: any) => data?.data?.getConnectCode?.user)
     .map((data: any) => data.data.getConnectCode.user);
+  console.log(`Returning data`)
   return unsortedPlayers.sort((p1, p2) =>
     p2.rankedNetplayProfile.ratingOrdinal - p1.rankedNetplayProfile.ratingOrdinal)
 }
