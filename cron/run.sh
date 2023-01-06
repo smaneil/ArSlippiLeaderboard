@@ -10,7 +10,11 @@ touch cron/logs/log.txt
 echo "cron/data"
 ls cron/data
 
+echo -e "\n"
+
 echo "cron/logs"
 ls cron/logs
+
+echo -e "\n"
 
 node --loader ts-node/esm --no-warnings cron/fetchStats.ts 2>&1 | tee cron/logs/log.txt
