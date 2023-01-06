@@ -25,9 +25,5 @@ jobs:
       - name: Npm Install
         run: npm install
 
-      - name: Pull The Player Data
+      - name: Pull The Player Data and Deploy
         run: bash ${GITHUB_WORKSPACE}/cron/run.sh
-
-      - name: Update on Github Pages
-        run: npm run deploy
-
