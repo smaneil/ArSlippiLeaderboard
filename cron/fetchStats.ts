@@ -17,7 +17,10 @@ const getPlayers = async () => {
   console.log(`Getting player data throttled`)
   const allData = codes.map(code => getPlayerDataThrottled(code))
   console.log(`Getting results`)
-  const results = await Promise.all(allData.map(p => p.catch(e => e)));
+  const results = await Promise.all(allData.map(p => p.catch(e => {
+    console.error(e)
+    return e
+  })));
   console.log(`Getting valid results`)
   const validResults = results.filter(result => !(result instanceof Error));
   console.log(`Getting unsorted players`)
