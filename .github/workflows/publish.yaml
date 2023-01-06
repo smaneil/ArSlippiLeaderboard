@@ -28,5 +28,8 @@ jobs:
       - name: Pull The Player Data
         run: bash ${GITHUB_WORKSPACE}/cron/run.sh
 
+#     https://www.npmjs.com/package/@jamesives/github-pages-deploy-action
       - name: Deploy to Github Pages
-        run: npm run deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
