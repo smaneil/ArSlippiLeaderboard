@@ -50,12 +50,14 @@ export const getPlayerData = async (connectCode: string) => {
   });
   console.log(`Request finished`)
   console.log(`Response Status: ${req.statusText}`)
+
   return req.json();
 };
 
 const limiter = new RateLimiter({tokensPerInterval: 1, interval: 'second'})
 
 export const getPlayerDataThrottled = async (connectCode: string) => {
+  console.log("Connect Code: " + connectCode)
   const remainingRequests = await limiter.removeTokens(1);
   return getPlayerData(connectCode)
 }
