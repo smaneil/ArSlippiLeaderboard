@@ -4,6 +4,7 @@ cd "$DIR_PATH/.."
 mkdir cron/data
 touch cron/data/players-new.json
 touch cron/data/players-old.json
+echo "[]" > cron/data/players-old.json
 mkdir cron/logs
 touch cron/logs/log.txt
 
