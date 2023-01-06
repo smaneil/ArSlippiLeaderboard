@@ -48,8 +48,8 @@ export const getPlayerData = async (connectCode: string) => {
     }),
     method: 'POST',
   });
-  console.log("Request finished")
-  console.log("Response Status: " + req.statusText)
+  console.log(`Request finished`)
+  console.log(`Response Status: ${req.statusText}`)
   return req.json();
 };
 
