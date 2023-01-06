@@ -6,4 +6,8 @@ touch cron/data/players-new.json
 touch cron/data/players-old.json
 mkdir cron/logs
 touch cron/logs/log.txt
+
+ls cron/data
+ls cron/logs
+
 node --loader ts-node/esm --no-warnings cron/fetchStats.ts 2>&1 | tee cron/logs/log.txt
