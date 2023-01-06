@@ -22,8 +22,8 @@ jobs:
       - name: Run Yarn
         run: yarn
 
-      - name: Npm Install
-        run: npm install
+#      - name: Npm Install
+#        run: npm install
 
       - name: Pull The Player Data and Deploy
         run: bash ${GITHUB_WORKSPACE}/cron/run.sh
