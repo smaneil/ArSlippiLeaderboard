@@ -18,6 +18,9 @@ jobs:
       - name: Use Node.js 18.12.0
         uses: actions/setup-node@v3
 
+      - name: Install NPM Dependencies
+        uses: npm install
+
       - name: Pull The Player Data
         run: bash ${GITHUB_WORKSPACE}/cron/run.sh
 
