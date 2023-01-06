@@ -26,3 +26,4 @@ jobs:
 
       - name: Update on Github Pages
         run: npm run deploy
+
