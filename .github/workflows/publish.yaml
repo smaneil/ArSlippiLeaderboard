@@ -1,7 +1,5 @@
 name: Fetch and update player data
-on:
-  schedule:
-    - cron: '0 * * * *'
+on: workflow_dispatch
 
 permissions:
   contents: write
