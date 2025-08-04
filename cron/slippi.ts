@@ -1,63 +1,61 @@
 import { RateLimiter } from "limiter"
 
 export const getPlayerData = async (connectCode: string) => {
-  const query = `fragment userProfilePage on User {
-    displayName
-    connectCode {
-          code
-          __typename
-        }
-      rankedNetplayProfile {
-            id
-            ratingOrdinal
-            ratingUpdateCount
-            wins
-            losses
-            dailyGlobalPlacement
-            dailyRegionalPlacement
-            continent
-            characters {
-                    id
-                    character
-                    gameCount
-                    __typename
-                  }
-            __typename
-          }
-      __typename
+  const query = `fragment profileFields on NetplayProfile {
+  id
+  ratingOrdinal
+  ratingUpdateCount
+  wins
+  losses
+  dailyGlobalPlacement
+  dailyRegionalPlacement
+  continent
+  characters {
+    character
+    gameCount
+    __typename
   }
+  __typename
+}
 
-  query AccountManagementPageQuery($cc: String!) {
-      getConnectCode(code: $cc) {
-            user {
-                    ...userProfilePage
-                    __typename
-                  }
-            __typename
-          }
-  }`;
+fragment userProfilePage on User {
+  fbUid
+  displayName
+  connectCode {
+    code
+    __typename
+  }
+  rankedNetplayProfile {
+    ...profileFields
+    __typename
+  }
+  __typename
+}
 
-  const req = await fetch('https://gql-gateway-dot-slippi.uc.r.appspot.com/graphql', {
+query UserProfilePageQuery($cc: String, $uid: String) {
+  getUser(fbUid: $uid, connectCode: $cc) {
+    ...userProfilePage
+    __typename
+  }
+}`;
+
+  const req = await fetch('https://internal.slippi.gg/graphql', {
     headers: {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      operationName: 'AccountManagementPageQuery',
+      operationName: 'UserProfilePageQuery',
       query,
-      variables: { cc: connectCode },
+      variables: { cc: connectCode, uid: connectCode },
     }),
     method: 'POST',
   });
-  console.log(`Request finished`)
-  console.log(`Response Status: ${req.statusText}`)
-
   return req.json();
 };
 
 const limiter = new RateLimiter({tokensPerInterval: 1, interval: 'second'})
 
 export const getPlayerDataThrottled = async (connectCode: string) => {
-  console.log("Connect Code: " + connectCode)
   const remainingRequests = await limiter.removeTokens(1);
   return getPlayerData(connectCode)
 }
