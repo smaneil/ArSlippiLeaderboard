@@ -12,12 +12,12 @@ dayjs.extend(relativeTime)
 
 const setCount = (player: Player) => {
   return player.rankedNetplayProfile.wins +
-    player.rankedNetplayProfile.losses;
+      player.rankedNetplayProfile.losses;
 }
 
 const sortAndPopulatePlayers = (players: Player[]) => {
   players = players.filter((p)=> setCount(p))
-    .concat(players.filter((p)=> !setCount(p)));
+      .concat(players.filter((p)=> !setCount(p)));
   players.forEach((player: Player, i: number) => {
     if(setCount(player) > 0) {
       player.rankedNetplayProfile.rank = i + 1
@@ -27,11 +27,13 @@ const sortAndPopulatePlayers = (players: Player[]) => {
 }
 
 export default function HomePage() {
+  console.log(playersNew);
+  console.log(playersOld);
 
   const rankedPlayersOld = sortAndPopulatePlayers(playersOld)
   const oldPlayersMap = new Map(
-    rankedPlayersOld.map((p) => [p.connectCode.code, p]));
-  
+      rankedPlayersOld.map((p) => [p.connectCode.code, p]));
+
   const players = sortAndPopulatePlayers(playersNew);
   players.forEach((p) => {
     const oldData = oldPlayersMap.get(p.connectCode.code)
@@ -45,28 +47,28 @@ export default function HomePage() {
   const [updateDesc, setUpdateDesc] = useState(updatedAt.fromNow())
   useEffect(() => {
     const interval = setInterval(
-      () => setUpdateDesc(updatedAt.fromNow()), 1000*60);
+        () => setUpdateDesc(updatedAt.fromNow()), 1000*60);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
   return (
-    <div className="flex flex-col items-center h-screen p-8">
-      <h1 className="text-3xl m-4 text-center text-white">
-        {settings.title}
-      </h1>
-      <div className="p-1 text-gray-300"> Updated {updateDesc}</div>
-      <Table players={players} />
-      <div className="p-4 text-gray-300 flex flex-col">
-        <div>Built by blorppppp & Modified by C4D, then Modified by smaniel </div>
-        <div>
-          <a href="https://www.buymeacoffee.com/blorppppp" target="_blank" rel="noreferrer"
-             className="text-gray-400 hover:text-indigo-700 mr-2 hover:underline">
-            Buy me a coffee
-          </a>☕
+      <div className="flex flex-col items-center h-screen p-8">
+        <h1 className="text-3xl m-4 text-center text-white">
+          {settings.title}
+        </h1>
+        <div className="p-1 text-gray-300"> Updated {updateDesc}</div>
+        <Table players={players} />
+        <div className="p-4 text-gray-300 flex flex-col">
+          <div>Built by blorppppp & Modified by C4D, then Modified by smaniel </div>
+          <div>
+            <a href="https://www.buymeacoffee.com/blorppppp" target="_blank" rel="noreferrer"
+               className="text-gray-400 hover:text-indigo-700 mr-2 hover:underline">
+              Buy me a coffee
+            </a>☕
+          </div>
         </div>
       </div>
-    </div>
   );
 }

@@ -11,26 +11,20 @@ const execPromise = util.promisify(exec);
 const getPlayerConnectCodes = async (): Promise<string[]> => {
 	return ['NATE#303','DAN#795','SOUL#906','RIMZ#185','DRU#419','RHEN#246','FUCK#896','ROO#430','BRIT#1','DEMI#264','MKSC#118','CASA#299','RUDY#241','CREM#138','JAB#1','CNRT#306','POPE#478','FOX#283','TRIC#0','NAHR#510','TOMA#777','BIGI#200','NOIS#213','ARKS#561','VOLT#667','GARD#822','FEND#693','OHKO#209','VYN#794','YURI#443','VETH#172','RICH#951','YOSH#749','MOUZ#734','ARBY#520','COCK#818','FLOW#242','MACH#889','AAAA#763','ZEN#514','BLUE#528','HPPY#543','BEAR#676','XARQ#644','DEMI#163','CANDLE#0','ASSY#117','HOOD#899','NANI#721','GOON#410','VEGG#584','DREW#0','TOBY#172','WHIM#279','EMO#480','RICH#617'] };
 
+
 const getPlayers = async () => {
   const codes = await getPlayerConnectCodes()
   console.log(`Found ${codes.length} player codes`)
-  console.log(`Getting player data throttled`)
   const allData = codes.map(code => getPlayerDataThrottled(code))
-  console.log(`Getting results`)
-  const results = await Promise.all(allData.map(p => p.catch(e => {
-    console.error(e)
-    return e
-  })));
-  console.log(`Getting valid results`)
+  const results = await Promise.all(allData.map(p => p.catch(e => e)));
   const validResults = results.filter(result => !(result instanceof Error));
-  console.log(`Getting unsorted players`)
   const unsortedPlayers = validResults
-    .filter((data: any) => data?.data?.getConnectCode?.user)
-    .map((data: any) => data.data.getConnectCode.user);
-  console.log("Returning data: " + unsortedPlayers)
+      .filter((data: any) => data.data.getUser)
+      .map((data: any) => data.data.getUser);
   return unsortedPlayers.sort((p1, p2) =>
-    p2.rankedNetplayProfile.ratingOrdinal - p1.rankedNetplayProfile.ratingOrdinal)
+      p2.rankedNetplayProfile.ratingOrdinal - p1.rankedNetplayProfile.ratingOrdinal)
 }
+
 
 async function main() {
   console.log('Starting player fetch.');
